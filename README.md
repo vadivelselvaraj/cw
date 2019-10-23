@@ -1,10 +1,8 @@
-# cw/filter
-
-Filters CloudWatch exports to just the JSON data from your logs so that they can be easily imported into other tools.
-
-Example usage:
-
+# Steps to run
+- Export the cloudwatch logs to a directory.
+- Navigate to `filter` directory and run the below
 ```
-filter -data=logs > output.json
-gzip output.json
+go build -o main main.go
+./main -path=logs/a8222e36-56f7-4c4c-bd9f-731786e80a6b > finalOutput.json
+gzip finalOutput.json
 ```

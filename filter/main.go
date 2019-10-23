@@ -5,8 +5,8 @@ import (
 	"flag"
 	"fmt"
 	"os"
-
-	"github.com/welldigital/cw/logfile"
+	"time"
+	"../logfile"
 )
 
 var pathFlag = flag.String("path", "", "The path to gzipped CloudWatch data (default format of data exported to S3).")

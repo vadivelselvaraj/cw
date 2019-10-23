@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
+	"regexp"
 )
 
 // Entry is a log entry from a system, e.g. CloudWatch, which might look like:
@@ -27,11 +28,15 @@ func EntryFromCloudwatch(s string) (e Entry, ok bool) {
 		return
 	}
 	m := s[25:]
-	e = Entry{
-		Time:    t,
-		Message: m,
+	// Let's output only the log lines that has ImageTaggingError or Event messages.
+	re := regexp.MustCompile(`\"message\":\"(ImageTaggingError|Event)\"`)
+	if (re.Match([]byte(m))) {
+		e = Entry{
+			Time: t,
+			Message: m,
+		}
+		ok = true	
 	}
-	ok = true
 	return
 }
 
